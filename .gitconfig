@@ -1,0 +1,5 @@
+[user]
+	email = sv.guidia@gmail.com
+	name = Sergei Guidia
+[core]
+	editor = nvim

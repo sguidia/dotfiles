@@ -1,0 +1,22 @@
+# Alacritty Configuration File
+
+[font]
+size = 14.0
+ 
+ 
+[font.normal]
+family = "UbuntuMono Nerd Font"
+ 
+
+[window]
+decorations = "none"
+
+[window.padding]
+x = 7
+y = 0
+
+[keyboard]
+bindings = [
+   { key = "C", mods = "Control|Shift", action = "Copy" },
+   { key = "V", mods = "Control|Shift", action = "Paste" }
+]
