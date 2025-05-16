@@ -99,6 +99,7 @@ alias kdebugnode='function _kdebugnode() { \
 }; _kdebugnode'
 
 
+
 convert_utc_to_chicago() {
   while read -r line; do
     echo "$line" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\.[0-9]+)?Z' | while read -r ts; do
