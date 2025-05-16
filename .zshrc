@@ -74,6 +74,29 @@ export AWS_PAGER=""
 
 
 
+
+# ──────────────────────────────────────────────────────────────
+# 🧰 kdebugnode — запускает отладочный pod (netshoot)
+#     на той же Kubernetes-ноде, где работает указанный pod
+#
+# 📦 Используется для отладки сети, DNS, iptables и прочего
+#
+# 📌 Синтаксис:
+#     kdebugnode <namespace> <pod-name>
+#
+# 🔍 Аргументы:
+#     <namespace>   — namespace, где работает pod
+#     <pod-name>    — имя pod-а, на котором ты хочешь отлаживать node
+#
+# 🧪 Пример:
+#     kdebugnode default platform-server-5db87d55d6-fs4kj
+#
+# 🔄 Что происходит:
+#   - Определяется, на какой node работает указанный pod
+#   - Запускается временный pod `debug-netshoot` с образом nicolaka/netshoot
+#   - Он запускается на той же ноде, с интерактивным bash
+#   - После выхода — автоматически удаляется
+# ──────────────────────────────────────────────────────────────
 alias kdebugnode='function _kdebugnode() { \
   ns="$1"; pod="$2"; \
   if [ -z "$ns" ] || [ -z "$pod" ]; then \
@@ -100,6 +123,28 @@ alias kdebugnode='function _kdebugnode() { \
 
 
 
+
+export TZ="America/Chicago"
+# ──────────────────────────────────────────────────────────────
+# 🕓 convert_utc_to_chicago — ищет и преобразует все UTC-таймстемпы
+#     в строках вида "2025-05-16T12:34:56Z" в локальное время (например, Chicago)
+#
+# 📌 Что делает:
+#   - Находит все UTC-форматированные таймстемпы в формате ISO 8601
+#   - Преобразует их в локальное время (по умолчанию: системный timezone)
+#   - Подставляет обратно в строку и выводит результат
+#
+# 📌 Синтаксис:
+#     echo "<строка>" | convert_utc_to_chicago
+#     cat <файл> | convert_utc_to_chicago
+#
+# 🔧 Заметки:
+#   - Используется `date -d`, поэтому важно, чтобы локаль и TZ были корректны
+#   - Для Chicago времени убедись, что `TZ` установлена, например:
+#       export TZ=America/Chicago
+#   - Можно адаптировать под другие зоны, заменив переменную окружения
+# ──────────────────────────────────────────────────────────────
+export TZ="America/Chicago"
 convert_utc_to_chicago() {
   while read -r line; do
     echo "$line" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\.[0-9]+)?Z' | while read -r ts; do
@@ -108,9 +153,6 @@ convert_utc_to_chicago() {
     done
   done
 }
-
-
-export TZ="America/Chicago"
 
 
 # Created by `pipx` on 2025-05-12 21:45:38
