@@ -6,10 +6,19 @@ size = 14.0
  
 [font.normal]
 family = "UbuntuMono Nerd Font"
- 
+style = "Regular"
 
-[window]
-decorations = "none"
+[font.bold]
+family = "UbuntuMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "UbuntuMono Nerd Font"
+style = "Italic"
+
+
+#[window]
+#decorations = "none"
 
 [window.padding]
 x = 7
